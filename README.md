@@ -8,6 +8,7 @@
 
 ### Modelos de Camadas (OSI vs. TCP/IP)
 
+<pre>
 Modelo OSI (7 Camadas)             Modelo TCP/IP (4/5 Camadas)     Unidade de Dados (PDU)
 [ 7. Aplicação    ] ──┐
 [ 6. Apresentação ] ──┼──────────> [ 4. Aplicação           ] ──> Dados
@@ -16,6 +17,7 @@ Modelo OSI (7 Camadas)             Modelo TCP/IP (4/5 Camadas)     Unidade de Da
 [ 3. Rede         ] ─────────────> [ 2. Rede / Internet     ] ──> Pacote
 [ 2. Enlace       ] ─────────────> [ 1. Enlace / Interface  ] ──> Quadro (Frame)
 [ 1. Física       ] ─────────────> [    Física              ] ──> Bits
+</pre>
 
 * **Mnemônico Camadas OSI:** **A**lguém **A**visou **S**obre o **T**ransporte da **R**ede do **E**difício **F**rancês.
 * **Equipamentos de Interconexão:**
@@ -59,15 +61,17 @@ Modelo OSI (7 Camadas)             Modelo TCP/IP (4/5 Camadas)     Unidade de Da
 
 ### Integração de Sistemas e Active Directory (AD)
 
-[ Active Directory (Floresta / Domínio / OUs) ]
-│
+<pre>
+ [ Active Directory (Floresta / Domínio / OUs) ]
+           │
 ┌──────────┴──────────┐
-▼ (LDAP - Porta 389)   ▼ (Kerberos - Porta 88)
+▼ (LDAP - Porta 389)  ▼ (Kerberos - Porta 88)
 Consultas de Diretório   Autenticação por Tickets (TGT/TGS)
 ▲                     ▲
 └──────────┬──────────┘
 │ (SSSD / Winbind / Samba-CIFS)
 [ Clientes Linux ]
+</pre>
 
 * **Samba (CIFS/SMB):** Permite interoperabilidade nativa de arquivos e impressoras entre Linux e Windows.
 * **NFS:** Focado em rede de arquivos nativa Unix-to-Unix.
@@ -79,7 +83,9 @@ Consultas de Diretório   Autenticação por Tickets (TGT/TGS)
 
 ### Ciclo Tradicional (PMBOK / Cascata)
 
-[ Requisitos ] ──> [ Projeto Lógico ] ──> [ Projeto Físico ] ──> [ Testes ] ──> [ Implantação ] ──> [ Fechamento ]
+<pre>
+ [ Requisitos ] ──> [ Projeto Lógico ] ──> [ Projeto Físico ] ──> [ Testes ] ──> [ Implantação ] ──> [ Fechamento ]
+</pre>
 
 * **Termo de Abertura (*Project Charter*):** Documento formal que autoriza o início do projeto e concede autoridade ao gerente.
 * **EAP / WBS (*Work Breakdown Structure*):** Decomposição hierárquica orientada a entregas do trabalho do projeto. **Não contém cronograma nem datas**, apenas o escopo decomposto em pacotes de trabalho.
@@ -102,11 +108,13 @@ Consultas de Diretório   Autenticação por Tickets (TGT/TGS)
 
 ### Arquitetura de Defesa e Ferramentas
 
-Tráfego Externo ──> [ Firewall (L3/L4) ] ──> [ WAF (L7) ] ──> [ Servidor Web / API ]
+<pre>
+ Tráfego Externo ──> [ Firewall (L3/L4) ] ──> [ WAF (L7) ] ──> [ Servidor Web / API ]
 │                      │
 └───────► [ SIEM ] ◄───┘ (Correlação de Logs)
 ▲
 [ Endpoints / Hosts ] ──(Agente EDR)─────┘
+</pre>
 
 * **Firewall Tradicional vs. WAF:** Firewall atua nas camadas 3/4 (IP/Porta); WAF atua na camada 7 protegendo aplicações web contra falhas da OWASP (ex: SQL Injection, XSS).
 * **IDS vs. IPS:** IDS apenas detecta e gera alerta (*passivo*); IPS detecta e descarta pacotes maliciosos em tempo real (*ativo/in-line*).
@@ -137,7 +145,8 @@ Tráfego Externo ──> [ Firewall (L3/L4) ] ──> [ WAF (L7) ] ──> [ Ser
 
 ### Virtualização (Hipervisores) vs. Containers
 
-[ Hipervisor Tipo 1 (Bare-Metal) ]                [ Hipervisor Tipo 2 (Hosted) ]                [ Contêineres (Docker / Podman) ]
+<pre>
+ [ Hipervisor Tipo 1 (Bare-Metal) ]                [ Hipervisor Tipo 2 (Hosted) ]                [ Contêineres (Docker / Podman) ]
 
 ┌──────────────────────────────────────┐     ┌──────────────────────────────────────┐     ┌──────────────────────────────────────┐
 │ App A (SO Guest) │ App B (SO Guest)  │     │ App A (SO Guest) │ App B (SO Guest)  │     │ App A (Libs/Deps) │ App B (Libs/Deps)│
@@ -149,6 +158,7 @@ Tráfego Externo ──> [ Firewall (L3/L4) ] ──> [ WAF (L7) ] ──> [ Ser
 │ Hardware Físico                      │     │ Hardware Físico                      │
 └──────────────────────────────────────┘     └──────────────────────────────────────┘
 
+</pre>
 * **Diferença Crítica de Container:** Contêineres **não virtualizam hardware** nem sobem um kernel próprio; eles usam recursos de isolamento do kernel host (*namespaces* e *cgroups*).
 * **Infraestrutura como Código (IaC):** Garantia de **Idempotência** (executar o script 1 ou 100 vezes gera exatamente o mesmo estado final).
   * **Terraform:** Provisionamento declarativo de infraestrutura.
@@ -172,7 +182,8 @@ Tráfego Externo ──> [ Firewall (L3/L4) ] ──> [ WAF (L7) ] ──> [ Ser
 
 ### ITIL 4 & COBIT 4.1
 
-[ Sistema de Valor de Serviço (SVS) - ITIL 4 ]
+<pre>
+ [ Sistema de Valor de Serviço (SVS) - ITIL 4 ]
 
 ┌────────────────────────────────────────────────────────────────────────┐
 │  Oportunidade / Demanda ──> [ Cadeia de Valor de Serviço ] ──> Valor   │
@@ -181,6 +192,7 @@ Tráfego Externo ──> [ Firewall (L3/L4) ] ──> [ WAF (L7) ] ──> [ Ser
 │  1. Organizações e Pessoas          3. Parceiros e Fornecedores        │
 │  2. Informação e Tecnologia         4. Fluxos de Valor e Processos     │
 └────────────────────────────────────────────────────────────────────────┘
+</pre>
 
 * **Práticas ITIL Fundamentais:**
   * **Incidente:** Restabelecer a operação normal do serviço o mais rápido possível (foco no sintoma imediato).
@@ -194,7 +206,9 @@ Tráfego Externo ──> [ Firewall (L3/L4) ] ──> [ WAF (L7) ] ──> [ Ser
 
 ### NIST SP 800-61 (Ciclo de Vida de Resposta a Incidentes)
 
-[ 1. Preparação ] ──> [ 2. Detecção e Análise ] ──> [ 3. Contenção, Erradicação e Recuperação ] ──> [ 4. Pós-Incidente (Lições Aprendidas) ]
+<pre>
+ [ 1. Preparação ] ──> [ 2. Detecção e Análise ] ──> [ 3. Contenção, Erradicação e Recuperação ] ──> [ 4. Pós-Incidente (Lições Aprendidas) ]
+</pre>
 
 1. **Preparação:** Políticas, ferramentas, equipe treinada.
 2. **Detecção e Análise:** Identificar vetores e validar se o alerta é real.
@@ -244,7 +258,6 @@ Tráfego Externo ──> [ Firewall (L3/L4) ] ──> [ WAF (L7) ] ──> [ Ser
 
 ### Análise de Complexidade de Algoritmos (Big-O)
 
-```text
 Excelente: O(1)  ──> Busca em Hash Table
 Bom:       O(log n) ──> Busca Binária em Árvore Balanceada
 Aceitável: O(n)  ──> Busca Linear em Lista Encadeada
@@ -252,7 +265,6 @@ Médio:     O(n log n) ──> MergeSort, QuickSort (médio)
 Ruim:      O(n²) ──> BubbleSort, InsertionSort (dois loops aninhados)
 Péssimo:   O(2ⁿ) ou O(n!) ──> Algoritmos de força bruta exponencial
 
-Markdown
 ### Estruturas de Dados Fundamentais
 
 * **Pilha (*Stack*):** LIFO (*Last-In, First-Out*). Operações: `push` (inserir) e `pop` (remover) sempre no topo.
